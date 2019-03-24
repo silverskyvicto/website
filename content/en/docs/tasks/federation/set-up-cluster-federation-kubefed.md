@@ -1,14 +1,16 @@
 ---
+title: Set up Cluster Federation with Kubefed
 reviewers:
 - madhusudancs
 content_template: templates/task
-title: Set up Cluster Federation with Kubefed
+weight: 125
 ---
 
 {{% capture overview %}}
-{{< note >}}
-{{< include "federation-current-state.md" >}}
-{{< /note >}}
+
+{{< deprecationfilewarning >}}
+{{< include "federation-deprecation-warning-note.md" >}}
+{{< /deprecationfilewarning >}}
 
 Kubernetes version 1.5 and above includes a new command line tool called
 [`kubefed`](/docs/admin/kubefed/) to help you administrate your federated
@@ -92,7 +94,7 @@ sudo chmod +x /usr/local/bin/kubefed
 ### Install kubectl
 
 You can install a matching version of kubectl using the instructions on
-the  [kubectl install page](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+the  [kubectl install page](/docs/tasks/tools/install-kubectl/).
 
 ## Choosing a host cluster.
 

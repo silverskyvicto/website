@@ -130,7 +130,7 @@ services](/docs/concepts/services-networking/service/#nodeport) or use `HostNetw
 
 ## Pods are not accessible via their Service IP
 
-- Many network add-ons do not yet enable [hairpin mode](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-service/#a-pod-cannot-reach-itself-via-service-ip)
+- Many network add-ons do not yet enable [hairpin mode](/docs/tasks/debug-application-cluster/debug-service/#a-pod-cannot-reach-itself-via-service-ip)
   which allows pods to access themselves via their Service IP. This is an issue related to
   [CNI](https://github.com/containernetworking/cni/issues/476). Please contact the network
   add-on provider to get the latest status of their support for hairpin mode.
@@ -260,5 +260,24 @@ yum downgrade docker-1.13.1-75.git8633870.el7.centos.x86_64 docker-client-1.13.1
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install docker-ce-18.06.1.ce-3.el7.x86_64
 ```
+
+## Not possible to pass a comma separated list of values to arguments inside a `--component-extra-args` flag
+
+`kubeadm init` flags such as `--component-extra-args` allow you to pass custom arguments to a control-plane
+component like the kube-apiserver. However, this mechanism is limited due to the underlying type used for parsing
+the values (`mapStringString`).
+
+If you decide to pass an argument that supports multiple, comma-separated values such as
+`--apiserver-extra-args "enable-admission-plugins=LimitRanger,NamespaceExists"` this flag will fail with
+`flag: malformed pair, expect string=string`. This happens because the list of arguments for
+`--apiserver-extra-args` expects `key=value` pairs and in this case `NamespacesExists` is considered
+as a key that is missing a value.
+
+Alternativelly, you can try separating the `key=value` pairs like so:
+`--apiserver-extra-args "enable-admission-plugins=LimitRanger,enable-admission-plugins=NamespaceExists"`
+but this will result in the key `enable-admission-plugins` only having the value of `NamespaceExists`.
+
+A known workaround is to use the kubeadm
+[configuration file](/docs/setup/independent/control-plane-flags/#apiserver-flags).
 
 {{% /capture %}}

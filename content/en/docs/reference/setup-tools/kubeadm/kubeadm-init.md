@@ -122,7 +122,7 @@ the [kubeadm config migrate](/docs/reference/setup-tools/kubeadm/kubeadm-config/
 because `v1alpha3` will be removed in Kubernetes 1.14.
 
 For more details on each field in the `v1beta1` configuration you can navigate to our
-[API reference pages.] (https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta1)
+[API reference pages](https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta1).
 
 ### Adding kube-proxy parameters {#kube-proxy}
 
@@ -148,8 +148,8 @@ Allowed customization are:
 
 * To provide an alternative `imageRepository` to be used instead of
   `k8s.gcr.io`.
-* To provide a `unifiedControlPlaneImage` to be used instead of different images for control plane components.
-* To provide a specific `etcd.image` to be used instead of the image available at`k8s.gcr.io`.
+* To set `useHyperKubeImage` to `true` to use the HyperKube image.
+* To provide a specific `imageRepository` and `imageTag` for etcd or DNS add-on.
 
 Please note that the configuration field `kubernetesVersion` or the command line flag
 `--kubernetes-version` affect the version of the images.
@@ -283,7 +283,7 @@ In order to set up a cluster where the master and worker nodes communicate with 
 ### Setting the node name
 
 By default, `kubeadm` assigns a node name based on a machine's host address. You can override this setting with the `--node-name`flag.
-The flag passes the appropriate [`--hostname-override`](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/#options) 
+The flag passes the appropriate [`--hostname-override`](/docs/reference/command-line-tools-reference/kubelet/#options) 
 to the kubelet.
 
 Be aware that overriding the hostname can [interfere with cloud providers](https://github.com/kubernetes/website/pull/8873).
@@ -311,7 +311,7 @@ without manual intervention. This and other limitations are expected to be
 resolved before self-hosting graduates from alpha.
 
 By default, self-hosted control plane Pods rely on credentials loaded from
-[`hostPath`](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath)
+[`hostPath`](/docs/concepts/storage/volumes/#hostpath)
 volumes. Except for initial creation, these credentials are not managed by
 kubeadm.
 
